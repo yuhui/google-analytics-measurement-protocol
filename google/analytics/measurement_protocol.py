@@ -153,7 +153,7 @@ class GoogleAnalytics(object):
         ):
         custom_dimension_payload = {}
         if custom_dimensions:
-            for index, value in custom_dimensions.iterItems():
+            for index, value in custom_dimensions.iteritems():
                 key = 'cd{}'.format(index)
                 custom_dimension_payload[key] = str(value)
         return custom_dimension_payload
@@ -164,7 +164,7 @@ class GoogleAnalytics(object):
         ):
         custom_metric_payload = {}
         if custom_metrics:
-            for index, value in custom_metrics.iterItems():
+            for index, value in custom_metrics.iteritems():
                 if not isinstance(value, int) and not isinstance(value, float):
                     raise ValueError('{} should be a number to use as a metric.')
                 key = 'cd{}'.format(index)

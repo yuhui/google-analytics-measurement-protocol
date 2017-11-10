@@ -20,7 +20,11 @@ Todo:
 
 """
 
-import requests # to send his to GA's collection endpoint
+__author__ = 'Yu Hui'
+__version__ = '0.1dev1'
+__license__ = 'License :: OSI Approved :: MIT License'
+
+import requests # to send hits to GA's collection endpoint
 from random import random # to generate the cache buster
 
 GA_ENDPOINT = "https://www.google-analytics.com/collect"

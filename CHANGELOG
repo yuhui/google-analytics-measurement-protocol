@@ -1,0 +1,2 @@
+0.1dev1:
+- Track pageview, event, transaction, item, screenview, exception, timing.

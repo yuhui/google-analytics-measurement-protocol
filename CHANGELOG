@@ -1,2 +1,6 @@
+0.2dev1:
+- Preserve custom dimensions, custom metrics, page, hostname and screen name across hits.
+- Add docstrings.
+
 0.1dev1:
 - Track pageview, event, transaction, item, screenview, exception, timing.

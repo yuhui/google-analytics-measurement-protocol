@@ -48,13 +48,10 @@ Send hit data with the appropriate methods:
 - `send_exception(ex_description, ex_fatal)`
 - `send_timing(timing_category, timing_var, timing_value, timing_label)`
 
-Coming soon:
+Not available:
 - `transaction`
 - `item`
-
-**Important**
-
-At this time, you cannot send Enhanced Ecommerce data.
+- Enhanced Ecommerce
 
 ## Debugging
 Use `debug=True` when creating the tracker, e.g.

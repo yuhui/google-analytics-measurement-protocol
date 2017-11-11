@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='google-analytics-measurement-protocol',
-    version='0.1dev1',
+    version='0.2dev1',
     description='Send hits to Google Analytics through its Measurement Protocol API.',
     long_description=open('README.md').read(),
     author='Yu Hui',

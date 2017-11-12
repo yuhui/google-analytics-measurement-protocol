@@ -51,7 +51,12 @@ Send hit data with the appropriate methods:
 Not available:
 - `transaction`
 - `item`
+- Traffic Sources
 - Enhanced Ecommerce
+
+**Note about Content Experiments**
+
+Support for Content Experiment tracking will *never* be available because Google Analytics has deprecated this feature.
 
 ## Debugging
 Use `debug=True` when creating the tracker, e.g.

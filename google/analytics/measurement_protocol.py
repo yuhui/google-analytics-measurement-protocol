@@ -103,7 +103,7 @@ class GoogleAnalytics(object):
         self.ip_address = ip_address
         self.user_language = user_language
 
-        if debug and not isinstance(debug, bool):
+        if debug is not None and not isinstance(debug, bool):
             raise ValueError('debug should be a boolean.')
         else:
             self.debug = debug

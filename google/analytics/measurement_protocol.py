@@ -21,7 +21,7 @@ Todo:
 """
 
 __author__ = 'Yu Hui'
-__version__ = '0.2dev1'
+__version__ = '1.0a1'
 __license__ = 'License :: OSI Approved :: MIT License'
 
 from random import random # to generate the cache buster

@@ -1,3 +1,6 @@
+1.0a1:
+- Unit tests for creating a tracker and updating its custom dimensions, custom metrics or user ID.
+
 0.2dev1:
 - Preserve custom dimensions, custom metrics, page, hostname and screen name across hits.
 - Add docstrings.

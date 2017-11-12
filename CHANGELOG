@@ -1,3 +1,6 @@
+1.0a2:
+- Unit tests for tracker type, app name, app ID, app version, app installer ID.
+
 1.0a1:
 - Unit tests for creating a tracker and updating its custom dimensions, custom metrics or user ID.
 

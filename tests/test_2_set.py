@@ -6,6 +6,10 @@ import unittest
 from google.analytics.measurement_protocol import GoogleAnalytics
 
 PROPERTY_ID = 'UA-12345-6'
+APP_NAME = 'test app'
+APP_ID = 'test.app.py'
+APP_VERSION = '1.0'
+APP_INSTALLER_ID = 'test.py'
 ORIGINAL_CUSTOM_DIMENSIONS = {
     '1': 'foo',
     '3': 'bar',
@@ -32,6 +36,68 @@ BAD_CUSTOM_METRICS = {
     '3': 'word',
 }
 
+class SetAppName(unittest.TestCase):
+    """Tests for set() with app name, app ID, app version, app installer ID."""
+
+    def setUp(self):
+        self.ga = GoogleAnalytics(PROPERTY_ID)
+        self.ga.set(
+            app_name=APP_NAME,
+        )
+
+    def test_01_app_tracker_type(self):
+        self.assertEqual(
+            self.ga.tracker_type,
+            'app',
+            '"{}" should be "app"'.format(self.ga.tracker_type),
+        )
+
+    def test_02_matches_app_name(self):
+        self.assertEqual(
+            self.ga.app_name,
+            APP_NAME,
+            '"{}" should be "{}"'.format(self.ga.app_name, APP_NAME),
+        )
+
+    def test_03_empty_app_id(self):
+        self.assertIsNone(self.ga.app_id)
+
+    def test_04_empty_app_version(self):
+        self.assertIsNone(self.ga.app_version)
+
+    def test_05_empty_app_installer_id(self):
+        self.assertIsNone(self.ga.app_installer_id)
+
+class SetAppFieldsWithoutAppName(unittest.TestCase):
+    """Tests for set() with app fields without app name."""
+
+    def setUp(self):
+        self.ga = GoogleAnalytics(PROPERTY_ID)
+        self.ga.set(
+            app_id=APP_ID,
+            app_version=APP_VERSION,
+            app_installer_id=APP_INSTALLER_ID,
+        )
+
+    def test_01_web_tracker_type(self):
+        self.assertEqual(
+            self.ga.tracker_type,
+            'web',
+            '"{}" should be "web"'.format(self.ga.tracker_type),
+        )
+
+    def test_02_empty_app_name(self):
+        self.assertIsNone(self.ga.app_name)
+
+    def test_03_empty_app_id(self):
+        self.assertIsNone(self.ga.app_id)
+
+    def test_04_empty_app_version(self):
+        self.assertIsNone(self.ga.app_version)
+
+    def test_05_empty_app_installer_id(self):
+        self.assertIsNone(self.ga.app_installer_id)
+
 class SetUserId(unittest.TestCase):
     """Tests for set() with user_id."""
 
@@ -47,14 +113,14 @@ class SetUserId(unittest.TestCase):
         self.assertEqual(
             len(client_id_parts),
             2,
-            '{} does not have 2 parts'.format(self.ga.client_id),
+            '"{}" does not have 2 parts'.format(self.ga.client_id),
         )
 
     def test_02_matches_user_id(self):
         self.assertEqual(
             self.ga.user_id,
             ORIGINAL_USER_ID,
-            '{} should be {}'.format(self.ga.user_id, ORIGINAL_USER_ID),
+            '"{}" should be "{}"'.format(self.ga.user_id, ORIGINAL_USER_ID),
         )
 
 class SetNewUserId(unittest.TestCase):

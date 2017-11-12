@@ -15,14 +15,14 @@ class CreateDefaultTracker(unittest.TestCase):
     def setUp(self):
         self.ga = GoogleAnalytics(PROPERTY_ID)
 
-    def test_001_matches_property_id(self):
+    def test_01_matches_property_id(self):
         self.assertEqual(
             self.ga.property_id,
             PROPERTY_ID,
-            '{} should be {}'.format(self.ga.property_id, PROPERTY_ID),
+            '"{}" should be "{}"'.format(self.ga.property_id, PROPERTY_ID),
         )
 
-    def test_2_empty_user_id(self):
+    def test_02_empty_user_id(self):
         self.assertIsNone(self.ga.user_id)
 
     def test_03_random_client_id(self):
@@ -31,7 +31,7 @@ class CreateDefaultTracker(unittest.TestCase):
         self.assertEqual(
             len(client_id_parts),
             2,
-            '{} does not have 2 parts'.format(self.ga.client_id),
+            '"{}" does not have 2 parts'.format(self.ga.client_id),
         )
 
     def test_04_empty_custom_dimensions(self):
@@ -52,7 +52,14 @@ class CreateDefaultTracker(unittest.TestCase):
     def test_09_empty_app_installer_id(self):
         self.assertIsNone(self.ga.app_installer_id)
 
-    def test_10_true_debug(self):
+    def test_10_web_tracker_type(self):
+        self.assertEqual(
+            self.ga.tracker_type,
+            'web',
+            '"{}" should be "web"'.format(self.ga.tracker_type),
+        )
+
+    def test_11_false_debug(self):
         self.assertFalse(self.ga.debug)
 
 class CreateDefaultTrackerWithNonBooleanDebug(unittest.TestCase):
@@ -80,7 +87,7 @@ class CreateDefaultTrackerWithUserId(unittest.TestCase):
         self.assertEqual(
             self.ga.user_id,
             ORIGINAL_USER_ID,
-            '{} should be {}'.format(self.ga.user_id, ORIGINAL_USER_ID),
+            '"{}" should be "{}"'.format(self.ga.user_id, ORIGINAL_USER_ID),
         )
 
     def test_02_client_id(self):
@@ -91,7 +98,7 @@ class CreateDefaultTrackerWithUserId(unittest.TestCase):
         self.assertEqual(
             self.ga.client_id,
             hashed_user_id,
-            '{} should be {}'.format(self.ga.client_id, hashed_user_id)
+            '"{}" should be "{}"'.format(self.ga.client_id, hashed_user_id)
         )
 
 class CreateDefaultTrackerWithNewUserId(unittest.TestCase):
@@ -107,7 +114,7 @@ class CreateDefaultTrackerWithNewUserId(unittest.TestCase):
         self.assertEqual(
             self.ga.user_id,
             REVISED_USER_ID,
-            '{} should be {}'.format(self.ga.user_id, REVISED_USER_ID),
+            '"{}" should be "{}"'.format(self.ga.user_id, REVISED_USER_ID),
         )
 
     def test_02_client_id(self):
@@ -118,7 +125,7 @@ class CreateDefaultTrackerWithNewUserId(unittest.TestCase):
         self.assertEqual(
             self.ga.client_id,
             hashed_user_id,
-            '{} should be {}'.format(self.ga.client_id, hashed_user_id)
+            '"{}" should be "{}"'.format(self.ga.client_id, hashed_user_id)
         )
 
 def main():

@@ -823,13 +823,13 @@ class GoogleAnalytics(object):
         """Show the message from the validation server."""
         valid = hit_parsing_result['valid']
         hit = hit_parsing_result['hit']
-        print hit
+        print(hit)
         if valid:
-            print "Valid hit."
+            print("Valid hit.")
         else:
-            print "Invalid hit."
+            print("Invalid hit.")
             parser_messages = hit_parsing_result['parserMessage']
             for parser_message in parser_messages:
                 message_type = parser_message['messageType']
                 description = parser_message['description']
-                print "{}: {}".format(message_type, description)
+                print("{}: {}".format(message_type, description))

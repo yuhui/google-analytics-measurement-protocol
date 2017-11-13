@@ -200,7 +200,7 @@ class GoogleAnalytics(object):
         elif def_type == 'metrics':
             custom_definitions = self.custom_metrics
 
-        for index, value in dictionary.iteritems():
+        for index, value in dictionary.items():
             if def_type == 'metrics' and not self.__is_number(value):
                 raise ValueError(
                     '"{}" custom_metric should be a number.'.format(value)
@@ -396,7 +396,7 @@ class GoogleAnalytics(object):
                     'Expected custom_{} as a dict.'.format(def_type)
                 )
 
-            for index, value in dictionary.iteritems():
+            for index, value in dictionary.items():
                 if def_type == 'metrics' and not self.__is_number(value):
                     raise ValueError(
                         '"{}" custom_metric should be a number.'.format(value)
@@ -511,7 +511,7 @@ class GoogleAnalytics(object):
 
         # rebuild payload without None values
         data = {}
-        for key, value in payload.iteritems():
+        for key, value in payload.items():
             if value is not None:
                 data[key] = value
 

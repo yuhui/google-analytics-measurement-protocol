@@ -200,7 +200,7 @@ class GoogleAnalytics(object):
         elif def_type == 'metrics':
             custom_definitions = self.custom_metrics
 
-        for index, value in dictionary.iteritems():
+        for index, value in dictionary.items():
             if def_type == 'metrics' and not self.__is_number(value):
                 raise ValueError(
                     '"{}" custom_metric should be a number.'.format(value)
@@ -396,7 +396,7 @@ class GoogleAnalytics(object):
                     'Expected custom_{} as a dict.'.format(def_type)
                 )
 
-            for index, value in dictionary.iteritems():
+            for index, value in dictionary.items():
                 if def_type == 'metrics' and not self.__is_number(value):
                     raise ValueError(
                         '"{}" custom_metric should be a number.'.format(value)
@@ -511,7 +511,7 @@ class GoogleAnalytics(object):
 
         # rebuild payload without None values
         data = {}
-        for key, value in payload.iteritems():
+        for key, value in payload.items():
             if value is not None:
                 data[key] = value
 
@@ -823,13 +823,13 @@ class GoogleAnalytics(object):
         """Show the message from the validation server."""
         valid = hit_parsing_result['valid']
         hit = hit_parsing_result['hit']
-        print hit
+        print(hit)
         if valid:
-            print "Valid hit."
+            print("Valid hit.")
         else:
-            print "Invalid hit."
+            print("Invalid hit.")
             parser_messages = hit_parsing_result['parserMessage']
             for parser_message in parser_messages:
                 message_type = parser_message['messageType']
                 description = parser_message['description']
-                print "{}: {}".format(message_type, description)
+                print("{}: {}".format(message_type, description))

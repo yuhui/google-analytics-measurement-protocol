@@ -67,3 +67,20 @@ ga_debug = GoogleAnalytics('UA-12345-6', debug=True)
 ```
 
 This prevents hits from being sent to your Analytics property. Instead, your hits are validated against the [Measurement Protocol Validation Server](https://developers.google.com/analytics/devguides/collection/protocol/v1/validating-hits).
+
+A debug message is then shown with each hit. Debugging messages are tracked at the `DEBUG` level.
+
+### Logging
+
+To log the debugging messages to your own logger, create your tracker with a `logger`, e.g.
+
+```
+# create a debugger tracker with your logger
+import logging
+logger = logging.getLogger('my_app')
+...
+...
+ga_debug = GoogleAnalytics('UA-12345-6', debug=True, logger=logger)
+```
+
+Note: using a `logger` when `debug=False` has no effect. Since there are no debug messages, nothing gets logged.

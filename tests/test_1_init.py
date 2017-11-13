@@ -2,12 +2,14 @@
 """Unit tests for google.analytics.measurement_protocol's GoogleAnalytics."""
 
 import unittest
+import logging
 
 from google.analytics.measurement_protocol import GoogleAnalytics
 
 PROPERTY_ID = 'UA-12345-6'
 ORIGINAL_USER_ID = 'utama'
 REVISED_USER_ID = 'raffles'
+LOGGER = logging.getLogger('CreateDefaultTrackerWithNonBooleanDebug')
 
 class CreateDefaultTracker(unittest.TestCase):
     """Tests for __init__()."""
@@ -84,6 +86,29 @@ class CreateDefaultTrackerWithNonBooleanDebug(unittest.TestCase):
 
     def test_02_raises_error_with_int_debug(self):
         self.assertRaises(ValueError, self.__create_tracker_with_int_debug)
+
+class CreateDefaultTrackerWithBooleanDebug(unittest.TestCase):
+    """Tests for __init__() with boolean debug."""
+
+    def test_01_matches_false_debug(self):
+        ga = GoogleAnalytics(PROPERTY_ID, debug=False)
+        self.assertFalse(ga.debug)
+        self.assertIsNone(ga.logger)
+
+    def test_02_matches_false_debug_with_logger(self):
+        ga = GoogleAnalytics(PROPERTY_ID, debug=False, logger=LOGGER)
+        self.assertFalse(ga.debug)
+        self.assertIsNone(ga.logger)
+
+    def test_03_matches_true_debug(self):
+        ga = GoogleAnalytics(PROPERTY_ID, debug=True)
+        self.assertTrue(ga.debug)
+        self.assertIsNotNone(ga.logger)
+
+    def test_04_matches_true_debug_with_logger(self):
+        ga = GoogleAnalytics(PROPERTY_ID, debug=True, logger=LOGGER)
+        self.assertTrue(ga.debug)
+        self.assertEqual(ga.logger, LOGGER)
 
 class CreateDefaultTrackerWithUserId(unittest.TestCase):
     """Tests for __init__() with user_id."""

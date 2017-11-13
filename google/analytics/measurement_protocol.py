@@ -21,11 +21,12 @@ Todo:
 """
 
 __author__ = 'Yu Hui'
-__version__ = '1.0a1'
+__version__ = '1.0a2'
 __license__ = 'License :: OSI Approved :: MIT License'
 
 from random import random  as random_random # to generate the cache buster
 from sys import version as sys_version # to generate the user agent
+import logging
 import requests # to send hits to GA's collection endpoint
 
 GA_ENDPOINT = "https://www.google-analytics.com/collect"
@@ -47,6 +48,7 @@ class GoogleAnalytics(object):
 
     tracker_type = 'web' # app or web
     debug = False
+    logger = None
 
     app_name = None
     app_id = None
@@ -77,7 +79,8 @@ class GoogleAnalytics(object):
             document_encoding=None,
             ip_address=None,
             user_language=None,
-            debug=False
+            debug=False,
+            logger=None,
         ):
         """Create a new tracker object with base properties.
 
@@ -108,6 +111,9 @@ class GoogleAnalytics(object):
             raise ValueError('debug should be a boolean.')
         else:
             self.debug = debug
+            if debug:
+                # create a logger for logging the debugging messages later
+                self.logger = logger or logging.getLogger(__name__)
 
     def __client_id(self, client_id):
         """Set the Client ID from a preset client_id or a new one."""
@@ -823,13 +829,15 @@ class GoogleAnalytics(object):
         """Show the message from the validation server."""
         valid = hit_parsing_result['valid']
         hit = hit_parsing_result['hit']
-        print(hit)
-        if valid:
-            print("Valid hit.")
-        else:
-            print("Invalid hit.")
+
+        valid_message = "Valid" if valid else "Invalid"
+        log_message = ["{} hit: {}".format(valid_message, hit)]
+
+        if not valid:
             parser_messages = hit_parsing_result['parserMessage']
             for parser_message in parser_messages:
                 message_type = parser_message['messageType']
                 description = parser_message['description']
-                print("{}: {}".format(message_type, description))
+                log_message.append("- {}: {}".format(message_type, description))
+
+        self.logger.debug('\n'.join(log_message))

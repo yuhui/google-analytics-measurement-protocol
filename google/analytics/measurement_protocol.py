@@ -24,7 +24,8 @@ __author__ = 'Yu Hui'
 __version__ = '1.0a1'
 __license__ = 'License :: OSI Approved :: MIT License'
 
-from random import random # to generate the cache buster
+from random import random  as random_random # to generate the cache buster
+from sys import version as sys_version # to generate the user agent
 import requests # to send hits to GA's collection endpoint
 
 GA_ENDPOINT = "https://www.google-analytics.com/collect"
@@ -61,7 +62,7 @@ class GoogleAnalytics(object):
     page = None
     property_id = None
     screen_name = None
-    user_agent = 'python'
+    user_agent = sys_version
     user_id = None
     user_language = None
     version = 1
@@ -139,7 +140,7 @@ class GoogleAnalytics(object):
         return isinstance(value, (float, int))
 
     def __random(self):
-        return int(random() * 10**8)
+        return int(random_random() * 10**8)
 
     # One-time setup
 

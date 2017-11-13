@@ -62,6 +62,14 @@ class CreateDefaultTracker(unittest.TestCase):
     def test_11_false_debug(self):
         self.assertFalse(self.ga.debug)
 
+    def test_12_user_agent_is_sys_version(self):
+        from sys import version as sys_version
+        self.assertEqual(
+            self.ga.user_agent,
+            sys_version,
+            '"{}" should be "{}"'.format(self.ga.user_agent, sys_version),
+        )
+
 class CreateDefaultTrackerWithNonBooleanDebug(unittest.TestCase):
     """Tests for __init__() with non-boolean debug."""
 

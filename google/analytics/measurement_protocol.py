@@ -509,13 +509,14 @@ class GoogleAnalytics(object):
             )
             payload.update(content_groups_payload)
 
-        # remove any items that have None values
+        # rebuild payload without None values
+        data = {}
         for key, value in payload.iteritems():
-            if value is None:
-                payload.pop(key, None)
+            if value is not None:
+                data[key] = value
 
         endpoint = GA_DEBUG_ENDPOINT if self.debug else GA_ENDPOINT
-        req = requests.post(endpoint, data=payload)
+        req = requests.post(endpoint, data=data)
         if self.debug:
             response = req.json()
             self.__handle_debug_response(response['hitParsingResult'][0])

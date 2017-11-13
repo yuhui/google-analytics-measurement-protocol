@@ -66,7 +66,7 @@ class CreateDefaultTracker(unittest.TestCase):
         from sys import version as sys_version
         self.assertEqual(
             self.ga.user_agent,
-            sys_version,
+            sys_version.replace('\n', ''),
             '"{}" should be "{}"'.format(self.ga.user_agent, sys_version),
         )
 

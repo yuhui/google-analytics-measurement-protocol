@@ -62,7 +62,7 @@ class GoogleAnalytics(object):
     page = None
     property_id = None
     screen_name = None
-    user_agent = sys_version
+    user_agent = sys_version.replace('\n', '')
     user_id = None
     user_language = None
     version = 1

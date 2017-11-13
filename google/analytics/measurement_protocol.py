@@ -346,16 +346,15 @@ class GoogleAnalytics(object):
             ValueError if content_groups is not a list.
 
         """
-        if content_groups is None:
-            return
-
-        if not isinstance(content_groups, list):
-            raise ValueError('Expected content_groups as a list.')
-
         payload = {}
-        for i, content_group in enumerate(content_groups):
-            key = 'cg{}'.format(i + 1)
-            payload[key] = content_group
+
+        if content_groups is not None:
+            if not isinstance(content_groups, list):
+                raise ValueError('Expected content_groups as a list.')
+
+            for i, content_group in enumerate(content_groups):
+                key = 'cg{}'.format(i + 1)
+                payload[key] = content_group
 
         return payload
 

@@ -784,7 +784,7 @@ class GoogleAnalytics(object):
         Params:
             timing_category (str): Category of the user timing.
             timing_var (str): Variable of the user timing.
-            timing_value (str): Value of the user timing in milliseconds.
+            timing_value (int): Value of the user timing in milliseconds.
             timing_label (str): (optional) Label of the user timing.
             custom_dimensions (dict): (optional) Custom Dimension indices and values.
                     Syntax: { index: value, index: value, ... }
